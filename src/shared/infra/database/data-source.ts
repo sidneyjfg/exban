@@ -1,6 +1,6 @@
 import 'dotenv/config';  // Carrega variáveis de ambiente do arquivo .env
 import { DataSource } from 'typeorm';
-import { Client } from '../../../models/Client';
+import { Client } from '../../../models/Client.js';
 
 export const AppDataSource = new DataSource({
   type: 'postgres',

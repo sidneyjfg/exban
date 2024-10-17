@@ -10,8 +10,15 @@
     "esModuleInterop": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "outDir": "./dist"
+    "outDir": "./dist",
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules"]
+  "scripts": {
+    "build": "tsc --project tsconfig.build.json && tsc-alias"
+  },
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
 }
