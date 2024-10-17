@@ -1,0 +1,115 @@
+
+# Full Stack Exban - Gerenciamento de Clientes, Imóveis e Financiamentos
+
+Este projeto é uma API REST desenvolvida em Node.js e TypeScript para gerenciar um sistema básico de registro de **clientes**, **imóveis** e **financiamentos habitacionais**. O projeto foi desenvolvido para avaliar a aplicação de boas práticas de código seguindo a metodologia **SOLID** e implementação de funcionalidades CRUD.
+
+## Organização de Pastas no Modelo SOLID
+
+``` bash
+src/
+│
+├── config/                     # Configurações gerais (ex: banco de dados)
+│   └── database.ts
+│
+├── controllers/                # Controladores que lidam com as requisições HTTP
+│   └── ClientController.ts
+│   └── PropertyController.ts
+│   └── DealController.ts
+│
+├── dtos/                       # Data Transfer Objects
+│   └── CreateClientDTO.ts
+│   └── CreatePropertyDTO.ts
+│   └── CreateDealDTO.ts
+│
+├── models/                     # Modelos das entidades
+│   └── Client.ts
+│   └── Property.ts
+│   └── Deal.ts
+│
+├── repositories/               # Repositórios para acesso aos dados
+│   └── IClientRepository.ts
+│   └── ClientRepository.ts
+│   └── PropertyRepository.ts
+│   └── DealRepository.ts
+│
+├── services/                   # Lógica de negócios
+│   └── ClientService.ts
+│   └── PropertyService.ts
+│   └── DealService.ts
+│
+├── shared/                     # Código compartilhado (utilidades, infraestrutura, etc.)
+│   └── infra/                  # Infraestrutura (conexão com banco de dados, validações, etc.)
+│       └── database/
+│           └── data-source.ts
+│
+├── tests/                      # Testes unitários e de integração
+│   └── unit/                   # Testes unitários das funcionalidades
+│       └── ClientService.spec.ts
+│       └── PropertyService.spec.ts
+│       └── DealService.spec.ts
+│
+└── app.ts                      # Ponto de entrada da aplicação
+```
+
+## Como Executar o Projeto Localmente
+
+### Pré-requisitos
+
+- **Node.js** (versão 14 ou superior)
+- **PostgreSQL** (versão 12 ou superior)
+
+### Passos
+
+1. **Clonar o Repositório**
+   ```bash
+   git clone https://github.com/seu-usuario/fullstack-exban.git
+   ```
+
+2. **Instalar Dependências**
+   Acesse o diretório do projeto e instale as dependências utilizando o npm:
+   ```bash
+   cd fullstack-exban
+   npm install
+   ```
+
+3. **Configurar Banco de Dados**
+   Crie um banco de dados PostgreSQL e ajuste as variáveis de ambiente no arquivo `.env`:
+   ```bash
+   DB_HOST=localhost
+   DB_PORT=5432
+   DB_USERNAME=seu-usuario
+   DB_PASSWORD=sua-senha
+   DB_NAME=imoveis_financiamentos_db
+   ```
+
+4. **Rodar Migrations**
+   Após configurar o banco de dados, execute as migrations para criar as tabelas:
+   ```bash
+   npm run typeorm migration:run
+   ```
+
+5. **Iniciar o Servidor**
+   Inicie o servidor em modo de desenvolvimento:
+   ```bash
+   npm run dev
+   ```
+
+6. **Testar a Aplicação**
+   Execute os testes unitários com o seguinte comando:
+   ```bash
+   npm test
+   ```
+
+## Funcionalidades
+
+- **Clientes:**
+  - Criação, listagem, atualização e remoção de clientes.
+  - Validação de CPF e verificação de duplicidade de clientes.
+  
+- **Imóveis:**
+  - Criação, listagem, atualização e remoção de imóveis.
+  - Associação de imóveis a clientes.
+
+- **Financiamentos:**
+  - Criação de financiamentos habitacionais para clientes.
+  - Cálculo de parcelas e condições de pagamento.
