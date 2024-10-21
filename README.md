@@ -167,33 +167,39 @@ cd frontend/
 npm start
 ```
 
-Clientes
+- Clientes
+
 POST /clients: Cria um novo cliente.
 GET /clients: Retorna todos os clientes.
-GET /clients/
-: Retorna um cliente específico pelo ID.
-PUT /clients/
-: Atualiza um cliente específico pelo ID.
-DELETE /clients/
-: Remove um cliente específico pelo ID.
-Propriedades
+GET /clients/:id Retorna um cliente específico pelo ID.
+PUT /clients/:id Atualiza um cliente específico pelo ID.
+DELETE /clients/:id Remove um cliente específico pelo ID.
+
+- Propriedades
+
 POST /properties: Cria uma nova propriedade.
+
 GET /properties: Retorna todas as propriedades.
-GET /properties/
-: Retorna uma propriedade específica pelo ID.
-PUT /properties/
-: Atualiza uma propriedade específica pelo ID.
-DELETE /properties/
-: Remove uma propriedade específica pelo ID.
-Negócios
+
+GET /properties/:id Retorna uma propriedade específica pelo ID.
+
+PUT /properties/:id Atualiza uma propriedade específica pelo ID.
+
+DELETE /properties/:id Remove uma propriedade específica pelo ID.
+
+
+- Negócios
+
 POST /deals: Cria um novo negócio.
+
 GET /deals: Retorna todos os negócios.
-GET /deals/
-: Retorna um negócio específico pelo ID.
-PUT /deals/
-: Atualiza um negócio específico pelo ID.
-DELETE /deals/
-: Remove um negócio específico pelo ID.
+
+GET /deals/:id Retorna um negócio específico pelo ID.
+
+PUT /deals/:id Atualiza um negócio específico pelo ID.
+
+DELETE /deals/:id Remove um negócio específico pelo ID.
+
 
 ## Funcionalidades
 
