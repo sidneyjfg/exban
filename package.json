@@ -1,5 +1,5 @@
 {
-  "name": "fullstackexban",
+  "name": "@sidneyjfg/fullstackexban",
   "version": "1.0.0",
   "type": "module",
   "description": "",
@@ -9,7 +9,7 @@
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/app.js",
-    "test": "NODE_OPTIONS=--loader=ts-node/esm mocha src/tests/**/*.spec.ts"
+    "test": "NODE_OPTIONS=--loader=ts-node/esm mocha --require ts-node/register src/tests/**/*.spec.ts"
   },
   "dependencies": {
     "class-validator": "^0.14.1",
@@ -36,5 +36,8 @@
     "ts-node-dev": "^2.0.0",
     "tsconfig-paths": "^4.2.0",
     "typescript": "^5.6.3"
+  },
+  "publishConfig": {
+    "registry": "https://npm.pkg.github.com/"
   }
 }

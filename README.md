@@ -1,9 +1,31 @@
+# Fullstack Exban
 
-# Full Stack Exban - Gerenciamento de Clientes, Imóveis e Financiamentos
+Este é um projeto Fullstack chamado **Fullstack Exban**, que inclui um backend em Node.js utilizando TypeScript e um frontend em React. O sistema é projetado para gerenciar clientes, propriedades e negócios.
 
-Este projeto é uma API REST desenvolvida em Node.js e TypeScript para gerenciar um sistema básico de registro de **clientes**, **imóveis** e **financiamentos habitacionais**. O projeto foi desenvolvido para avaliar a aplicação de boas práticas de código seguindo a metodologia **SOLID** e implementação de funcionalidades CRUD.
+## Índice
 
-## Organização de Pastas no Modelo SOLID
+- [Pré-requisitos](#pré-requisitos)
+- [Configuração do Ambiente](#configuração-do-ambiente)
+- [Executando o Projeto](#executando-o-projeto)
+- [Documentação das Rotas](#documentação-das-rotas)
+- [Testes](#testes)
+
+## Pré-requisitos
+
+Antes de iniciar, verifique se você tem as seguintes ferramentas instaladas:
+
+- [Docker](https://www.docker.com/get-started)
+- [Node.js](https://nodejs.org/)
+- [npm](https://www.npmjs.com/)
+- [Git](https://git-scm.com/)
+
+## Configuração do Ambiente
+
+1. Clone o repositório:
+
+   ```bash
+   git clone https://github.com/SeuUsuario/fullstackexban.git
+   cd fullstackexban
 
 ``` bash
 fullstackexban/
@@ -124,32 +146,48 @@ frontend/
    ```
 
 3. **Configurar Banco de Dados**
-   Crie um banco de dados PostgreSQL e ajuste as variáveis de ambiente no arquivo `.env`:
+   Ajuste as variáveis de ambiente no arquivo `.env` ou diretamente no docker:
    ```bash
-   DB_HOST=localhost
+   DB_HOST=postgres
    DB_PORT=5432
-   DB_USERNAME=seu-usuario
+   DB_USERNAME=seu-usuario || postgres
    DB_PASSWORD=sua-senha
    DB_NAME=imoveis_financiamentos_db
    ```
 
-4. **Rodar Migrations**
-   Após configurar o banco de dados, execute as migrations para criar as tabelas:
-   ```bash
-   npm run typeorm migration:run
-   ```
-
 5. **Iniciar o Servidor**
-   Inicie o servidor em modo de desenvolvimento:
+   Inicie o servidor:
    ```bash
-   npm run dev
+   docker-compose -f exban.yml up --build
    ```
 
-6. **Testar a Aplicação**
-   Execute os testes unitários com o seguinte comando:
-   ```bash
-   npm test
-   ```
+Clientes
+POST /clients: Cria um novo cliente.
+GET /clients: Retorna todos os clientes.
+GET /clients/
+: Retorna um cliente específico pelo ID.
+PUT /clients/
+: Atualiza um cliente específico pelo ID.
+DELETE /clients/
+: Remove um cliente específico pelo ID.
+Propriedades
+POST /properties: Cria uma nova propriedade.
+GET /properties: Retorna todas as propriedades.
+GET /properties/
+: Retorna uma propriedade específica pelo ID.
+PUT /properties/
+: Atualiza uma propriedade específica pelo ID.
+DELETE /properties/
+: Remove uma propriedade específica pelo ID.
+Negócios
+POST /deals: Cria um novo negócio.
+GET /deals: Retorna todos os negócios.
+GET /deals/
+: Retorna um negócio específico pelo ID.
+PUT /deals/
+: Atualiza um negócio específico pelo ID.
+DELETE /deals/
+: Remove um negócio específico pelo ID.
 
 ## Funcionalidades
 
@@ -163,4 +201,3 @@ frontend/
 
 - **Financiamentos:**
   - Criação de financiamentos habitacionais para clientes.
-  - Cálculo de parcelas e condições de pagamento.

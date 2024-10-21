@@ -8,3 +8,5 @@ logs/
 
 # Diretório de build do React
 build/
+
+.npmrc

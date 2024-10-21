@@ -1,17 +1,24 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ES2020",  // Ou uma versão compatível com sua versão Node.js
+    "target": "ES2020", // Ou uma versão compatível com sua versão Node.js
     "outDir": "./dist",
     "baseUrl": "./src",
     "paths": {
-      "*": ["src/*"]
+      "*": [
+        "*"
+      ] // Isso permitirá que você importe diretamente do src
     },
     "esModuleInterop": true,
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "moduleResolution": "node"
   },
-  "include": ["src/**/*.ts"],
-  "exclude": ["node_modules", "**/*.spec.ts"]
+  "include": [
+    "src/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules",
+    "**/*.spec.ts"
+  ]
 }

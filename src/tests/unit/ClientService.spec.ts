@@ -1,8 +1,8 @@
 import { expect } from 'chai';
-import { ClientService } from '../../services/ClientService';
-import { ClientRepository } from '../../repositories/ClientRepository';
-import { AppDataSource } from '../../shared/infra/database/data-source';
-import { CreateClientDTO } from '../../dtos/CreateClientDTO';
+import { ClientService } from '../../services/ClientService';  // Remova .ts na importação
+import { ClientRepository } from '../../repositories/ClientRepository';  // Remova .ts na importação
+import { AppDataSource } from '../../shared/infra/database/data-source';  // Remova .ts na importação
+import { CreateClientDTO } from '../../dtos/CreateClientDTO';  // Remova .ts na importação
 
 before(async () => {
   if (!AppDataSource.isInitialized) {
@@ -22,7 +22,7 @@ describe('ClientService', () => {
 
     const clientData: CreateClientDTO = {
       name: 'Sidney da Exban',
-      fiscalIdentifier: '12345678901',  // CPF válido (11 dígitos)
+      fiscalIdentifier: '70115233679',  // CPF válido (11 dígitos)
       email: 'sidney@exban.com',
     };
 
@@ -45,7 +45,7 @@ describe('ClientService - Validação de CPF', () => {
   it('deve criar um cliente com um CPF válido', async () => {
     const validClient: CreateClientDTO = {
       name: 'John',
-      fiscalIdentifier: '12345678901',  // CPF válido
+      fiscalIdentifier: '05735038699',  // CPF válido
       email: 'john@example.com',
     };
 
@@ -63,6 +63,7 @@ describe('ClientService - Validação de CPF', () => {
 
     try {
       await clientService.createClient(invalidClient);
+      throw new Error('Expected an error but did not receive one.');
     } catch (error) {
       if (error instanceof Error) {
         expect(error.message).to.equal('Invalid CPF: Must have 11 digits and be properly formatted.');
@@ -82,6 +83,7 @@ describe('ClientService - Validação de CPF', () => {
 
     try {
       await clientService.createClient(invalidClient);
+      throw new Error('Expected an error but did not receive one.');
     } catch (error) {
       if (error instanceof Error) {
         expect(error.message).to.equal('Invalid CPF: Must have 11 digits and be properly formatted.');

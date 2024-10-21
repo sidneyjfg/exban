@@ -6,13 +6,12 @@ const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 export const AppDataSource = new DataSource({
     type: 'postgres',
-    host: process.env.DB_HOST || 'localhost',
+    host: process.env.DB_HOST || 'postgres', // Alterar para 'postgres', que é o nome do serviço no Docker Compose
     port: Number(process.env.DB_PORT) || 5432,
     username: process.env.DB_USERNAME || 'postgres',
     password: process.env.DB_PASSWORD || '',
     database: process.env.DB_NAME || 'imoveis_financiamentos_db',
-    entities: [join(__dirname, '../../../models/*.js')], // Caminho ajustado para apontar corretamente para `dist/models`
-    migrations: [join(__dirname, '../../../migrations/*.js')],
-    synchronize: true, // Apenas para desenvolvimento
-    logging: ['query', 'error'], // Habilite logs de query e erros
+    entities: [join(__dirname, '../../../dist/models/*.js')],
+    migrations: [join(__dirname, '../../../dist/migrations/*.js')],
+    synchronize: false, // Apenas para desenvolvimento
 });
