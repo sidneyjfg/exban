@@ -141,7 +141,7 @@ frontend/
 2. **Instalar Dependências**
    Acesse o diretório do projeto e instale as dependências utilizando o npm:
    ```bash
-   cd fullstack-exban
+   cd exban
    npm install
    ```
 
@@ -160,6 +160,12 @@ frontend/
    ```bash
    docker-compose -f exban.yml up --build
    ```
+
+Caso queira testar pelo frontend em uma outra aba/terminal execute
+```bash
+cd frontend/
+npm start
+```
 
 Clientes
 POST /clients: Cria um novo cliente.
