@@ -1,8 +1,8 @@
 import { IClientRepository } from '../repositories/IClientRepository.js';
 import { Client } from '../models/Client.js';
-import { CreateClientDTO, UpdateClientDTO } from '../dtos/CreateClientDTO.js';
+import { CreateClientDTO } from '../dtos/CreateClientDTO.js';
+import { UpdateClientDTO } from '../dtos/UpdateClientDTO.js';
 import { isValidCPF } from '../shared/infra/validator/CPFValidator.js'; // Assuma que essas funções estão implementadas corretamente
-import { isValidEmail } from '../shared/infra/validator/EmailValidator.js'; // Assuma que essas funções estão implementadas corretamente
 
 export class ClientService {
   constructor(private clientRepository: IClientRepository) { }
@@ -10,20 +10,24 @@ export class ClientService {
   public async createClient(data: CreateClientDTO): Promise<Client> {
     const { fiscalIdentifier } = data;
 
+    // Validação do CPF
     if (!isValidCPF(fiscalIdentifier)) {
       throw new Error('CPF inválido');
     }
-    const existingClientByCPF = await this.clientRepository.findByFiscalIdentifier(data.fiscalIdentifier);
+
+    // Verifica duplicação de CPF no banco de dados
+    const existingClientByCPF = await this.clientRepository.findByFiscalIdentifier(fiscalIdentifier);
     if (existingClientByCPF) {
-      throw new Error('CPF já registrado!');
+      throw new Error('CPF já registrado');
     }
 
-    // Validação do E-mail
+    // Validação de e-mail (se necessário)
     const existingClientByEmail = await this.clientRepository.findByEmail(data.email);
     if (existingClientByEmail) {
-      throw new Error('Email já utilizado!.');
+      throw new Error('Email já registrado');
     }
 
+    // Criação do cliente
     return this.clientRepository.create(data);
   }
 
@@ -35,19 +39,42 @@ export class ClientService {
     return await this.clientRepository.findByFiscalIdentifier(cpf);
   }
 
-  public async getClientById(id: number): Promise<Client | undefined> {
+  public async getClientById(id: string): Promise<Client | undefined> {
     return await this.clientRepository.findById(id);
   }
 
-  public async updateClientById(id: number, data: UpdateClientDTO): Promise<Client | undefined> {
+  // Validação ao atualizar cliente
+  public async updateClientById(id: string, data: UpdateClientDTO): Promise<Client | undefined> {
     const client = await this.clientRepository.findById(id);
     if (!client) {
       throw new Error('Cliente não encontrado');
     }
 
+    const { fiscalIdentifier } = data;
+
+    // Valida o CPF durante a atualização
+    if (fiscalIdentifier && !isValidCPF(fiscalIdentifier)) {
+      throw new Error('CPF inválido');
+    }
+
+    if (fiscalIdentifier && fiscalIdentifier !== client.fiscalIdentifier) {
+      const existingClientByCPF = await this.clientRepository.findByFiscalIdentifier(fiscalIdentifier);
+      if (existingClientByCPF) {
+        throw new Error('CPF já registrado');
+      }
+    }
+
+    // Verifica se o e-mail já existe para outro cliente
+    if (data.email && data.email !== client.email) {
+      const existingClientByEmail = await this.clientRepository.findByEmail(data.email);
+      if (existingClientByEmail) {
+        throw new Error('Email já registrado');
+      }
+    }
+
     const updateData = {
-      ...client, // Spread the existing data
-      ...data // Override with new data
+      ...client,
+      ...data
     };
 
     return await this.clientRepository.update(id, updateData);
@@ -57,7 +84,7 @@ export class ClientService {
     await this.clientRepository.deleteByFiscalIdentifier(cpf);
   }
 
-  public async deleteClientById(id: number): Promise<void> {
+  public async deleteClientById(id: string): Promise<void> {
     await this.clientRepository.deleteById(id);
   }
   public async updateClientByFiscalIdentifier(cpf: string, data: UpdateClientDTO): Promise<Client | undefined> {

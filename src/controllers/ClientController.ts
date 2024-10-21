@@ -19,12 +19,21 @@ export class ClientController {
 
   public async getAll(req: Request, res: Response): Promise<Response> {
     try {
+      console.log('Chamando o método getAll no controlador...');
       const clients = await this.clientService.getAllClients();
       return res.status(200).json(clients);
     } catch (error) {
+      console.error('Erro no controlador getAll:', error);  // Log completo do erro
+      if(error instanceof Error){
+        return res.status(500).json({ message: error.message || 'Unexpected error' });
+      }
       return res.status(500).json({ message: 'Unexpected error' });
+
     }
   }
+
+
+
 
   public async getClientByCPF(req: Request, res: Response): Promise<Response> {
     try {
@@ -35,11 +44,11 @@ export class ClientController {
       return res.status(404).json({ message: 'Cliente não encontrado' });
     }
   }
-  
+
 
   public async getClientById(req: Request, res: Response): Promise<Response> {
     try {
-      const client = await this.clientService.getClientById(Number(req.params.id));
+      const client = await this.clientService.getClientById(String(req.params.id));
       return client ? res.json(client) : res.status(404).json({ message: 'Cliente não encontrado' });
     } catch (error) {
       return res.status(404).json({ message: 'Cliente não encontrado' });
@@ -48,16 +57,19 @@ export class ClientController {
 
   public async updateClientById(req: Request, res: Response): Promise<Response> {
     try {
-      const client = await this.clientService.updateClientById(Number(req.params.id), req.body);
+      const client = await this.clientService.updateClientById(String(req.params.id), req.body);
       return res.json(client);
     } catch (error) {
-      return res.status(400).json({ message: 'Error updating client' });
+      if (error instanceof Error) {
+        return res.status(400).json({ message: error.message });
+      }
+      return res.status(500).json({ message: 'Unexpected error' });
     }
   }
 
   public async deleteClientById(req: Request, res: Response): Promise<Response> {
     try {
-      await this.clientService.deleteClientById(Number(req.params.id));
+      await this.clientService.deleteClientById(String(req.params.id));
       return res.status(204).json();
     } catch (error) {
       return res.status(404).json({ message: 'Cliente não encontrado' });

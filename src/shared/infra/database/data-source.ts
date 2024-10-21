@@ -1,6 +1,10 @@
-import 'dotenv/config';  // Carrega variáveis de ambiente do arquivo .env
 import { DataSource } from 'typeorm';
-import { Client } from '../../../models/Client.js';
+import { fileURLToPath } from 'url';
+import { dirname, join } from 'path';
+import 'dotenv/config';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
 export const AppDataSource = new DataSource({
   type: 'postgres',
@@ -9,7 +13,9 @@ export const AppDataSource = new DataSource({
   username: process.env.DB_USERNAME || 'postgres',
   password: process.env.DB_PASSWORD || '',
   database: process.env.DB_NAME || 'imoveis_financiamentos_db',
-  entities: [Client],  // entidades
+  entities: [join(__dirname, '../../../models/*.js')],  // Caminho ajustado para apontar corretamente para `dist/models`
+  migrations: [join(__dirname, '../../../migrations/*.js')],
   synchronize: true,  // Apenas para desenvolvimento
-  logging: false,
+  logging: ['query', 'error'],  // Habilite logs de query e erros
 });
+

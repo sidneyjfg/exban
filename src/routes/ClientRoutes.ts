@@ -14,6 +14,15 @@ clientRoutes.get('/clients', (req: Request, res: Response) => {
   clientController.getAll(req, res);
 });
 
+// Rota para atualizar informações de um cliente existente pelo ID
+clientRoutes.put('/clients/:id', (req: Request, res: Response) => {
+  clientController.updateClientById(req, res);
+});
+
+clientRoutes.delete('/clients/:id', (req: Request, res: Response) => {
+  clientController.deleteClientById(req, res);
+});
+
 // Rota para criação de clientes
 clientRoutes.post('/clients', (req: Request, res: Response) => {
   clientController.create(req, res);

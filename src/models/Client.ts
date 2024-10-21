@@ -2,8 +2,8 @@ import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
 
 @Entity('clients')
 export class Client {
-  @PrimaryGeneratedColumn()  // Isso irá gerar um ID auto incrementado.
-  id?: number;
+  @PrimaryGeneratedColumn('uuid')  // Isso irá gerar um UUID.
+  id?: string;
 
   @Column()
   name!: string;

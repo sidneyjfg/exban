@@ -1,24 +1,17 @@
 {
   "compilerOptions": {
     "module": "ESNext",
-    "target": "ES6",
-    "moduleResolution": "Node",
-    "strict": true,
-    "baseUrl": "./src",
-    "experimentalDecorators": true,
-    "emitDecoratorMetadata": true,
-    "esModuleInterop": true,
-    "skipLibCheck": true,
-    "forceConsistentCasingInFileNames": true,
+    "target": "ES2020",  // Ou uma versão compatível com sua versão Node.js
     "outDir": "./dist",
+    "baseUrl": "./src",
+    "paths": {
+      "*": ["src/*"]
+    },
+    "esModuleInterop": true,
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "moduleResolution": "node"
   },
-  "scripts": {
-    "build": "tsc --project tsconfig.build.json && tsc-alias"
-  },
-  "include": [
-    "src/**/*.ts"
-  ],
-  "exclude": [
-    "node_modules"
-  ]
+  "include": ["src/**/*.ts"],
+  "exclude": ["node_modules", "**/*.spec.ts"]
 }

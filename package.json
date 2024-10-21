@@ -5,7 +5,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "NODE_OPTIONS=--loader=ts-node/esm ts-node-dev --project tsconfig.json --respawn src/app.ts",
+    "dev": "NODE_OPTIONS='--loader ts-node/esm' ts-node-dev --project tsconfig.json --respawn src/app.ts",
+    "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/app.js",
     "test": "NODE_OPTIONS=--loader=ts-node/esm mocha src/tests/**/*.spec.ts"
@@ -15,10 +16,10 @@
     "cors": "^2.8.5",
     "dotenv": "^16.4.5",
     "express": "^4.21.1",
+    "multer": "^1.4.5-lts.1",
     "pg": "^8.13.0",
     "reflect-metadata": "^0.2.2",
-    "typeorm": "^0.3.20",
-    "typescript": "^5.6.3"
+    "typeorm": "^0.3.20"
   },
   "devDependencies": {
     "@types/chai": "^5.0.0",
@@ -26,11 +27,14 @@
     "@types/express": "^5.0.0",
     "@types/express-validator": "^3.0.0",
     "@types/mocha": "^10.0.9",
-    "@types/node": "^22.7.5",
+    "@types/multer": "^1.4.12",
+    "@types/node": "^22.7.6",
     "@types/pg": "^8.6.6",
     "chai": "^5.1.1",
     "mocha": "^10.7.3",
     "ts-node": "^10.9.2",
-    "ts-node-dev": "^2.0.0"
+    "ts-node-dev": "^2.0.0",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.6.3"
   }
 }

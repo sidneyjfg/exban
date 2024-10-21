@@ -1,0 +1,36 @@
+.navbar {
+    position: fixed;
+    top: 30px; /* Distância do topo */
+    left: 50%;
+    transform: translateX(-50%); /* Centraliza a navbar horizontalmente */
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 45%; /* Ajuste para o tamanho da navbar */
+    padding: 15px 30px;
+    background-color: #ffffff; /* Cor de fundo da navbar */
+    border-radius: 10px; /* Bordas arredondadas para um design moderno */
+    box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); /* Sombra suave */
+    z-index: 1; /* Garante que a navbar fique sobreposta ao conteúdo */
+}
+
+.nav-links {
+    list-style: none;
+    display: flex;
+    justify-content: center; /* Centraliza os itens de lista */
+}
+
+.nav-links li {
+    margin-left: 20px;
+}
+
+.nav-links a {
+    text-decoration: none;
+    color: #333;
+    font-size: 1.2rem;
+    transition: color 0.3s;
+}
+
+.nav-links a:hover {
+    color: #ff8a80;
+}

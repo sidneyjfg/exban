@@ -6,49 +6,100 @@ Este projeto é uma API REST desenvolvida em Node.js e TypeScript para gerenciar
 ## Organização de Pastas no Modelo SOLID
 
 ``` bash
-src/
+fullstackexban/
 │
-├── config/                     # Configurações gerais (ex: banco de dados)
-│   └── database.ts
-│
-├── controllers/                # Controladores que lidam com as requisições HTTP
-│   └── ClientController.ts
-│   └── PropertyController.ts
-│   └── DealController.ts
-│
-├── dtos/                       # Data Transfer Objects
-│   └── CreateClientDTO.ts
-│   └── CreatePropertyDTO.ts
-│   └── CreateDealDTO.ts
-│
-├── models/                     # Modelos das entidades
-│   └── Client.ts
-│   └── Property.ts
-│   └── Deal.ts
-│
-├── repositories/               # Repositórios para acesso aos dados
-│   └── IClientRepository.ts
-│   └── ClientRepository.ts
-│   └── PropertyRepository.ts
-│   └── DealRepository.ts
-│
-├── services/                   # Lógica de negócios
-│   └── ClientService.ts
+├── services/
+│   ├── ClientService.ts
+│   ├── DealService.ts
 │   └── PropertyService.ts
-│   └── DealService.ts
 │
-├── shared/                     # Código compartilhado (utilidades, infraestrutura, etc.)
-│   └── infra/                  # Infraestrutura (conexão com banco de dados, validações, etc.)
-│       └── database/
-│           └── data-source.ts
+├── shared/
+│   └── infra/
+│       ├── database/
+│       │   ├── data-source.ts
+│       │   └── validator/
 │
-├── tests/                      # Testes unitários e de integração
-│   └── unit/                   # Testes unitários das funcionalidades
-│       └── ClientService.spec.ts
-│       └── PropertyService.spec.ts
-│       └── DealService.spec.ts
+├── tests/
 │
-└── app.ts                      # Ponto de entrada da aplicação
+├── utils/
+│   ├── app.ts
+│   └── server.ts
+│
+├── .env
+├── .gitignore
+├── Dockerfile
+├── exban.yml
+├── ormconfig.json
+├── package.json
+├── package-lock.json
+├── tsconfig.build.json
+├── tsconfig.json
+├── README.md
+│
+├── models/
+│   ├── Client.ts
+│   ├── Deal.ts
+│   └── Property.ts
+│
+├── repositories/
+│   ├── ClientRepository.ts
+│   ├── DealRepository.ts
+│   ├── IClientRepository.ts
+│   ├── IDealRepository.ts
+│   ├── IPropertyRepository.ts
+│   └── PropertyRepository.ts
+│
+├── controllers/
+│   ├── ClientController.ts
+│   ├── DealController.ts
+│   └── PropertyController.ts
+│
+├── dtos/
+│   └── ICreateClient.ts
+│
+├── routes/
+│   ├── ClientRoutes.ts
+│   ├── PropertyRoutes.ts
+│   └── index.ts
+│
+frontend/
+│
+├── public/
+│   ├── favicon.ico
+│   └── index.html
+│
+├── src/
+│   └── component/
+│       ├── style/
+│       │   ├── ClientForm.css
+│       │   ├── ClientList.css
+│       │   ├── Clients.css
+│       │   ├── ConfirmModal.css
+│       │   ├── NavBar.css
+│       │   ├── Properties.css
+│       │   ├── Property.css
+│       │   ├── PropertyCard.css
+│       │   └── PropertyList.css
+│       ├── ClientForm.jsx
+│       ├── ClientList.jsx
+│       ├── ConfirmModal.jsx
+│       ├── NavBar.jsx
+│       ├── Properties.jsx
+│       ├── PropertyCard.jsx
+│       ├── PropertyForm.jsx
+│       └── PropertyList.jsx
+│
+├── pages/
+│   └── index.js
+│
+├── services/
+│   ├── clientService.js
+│   └── propertyService.js
+│
+├── App.css
+├── App.js
+├── index.css
+└── index.js
 ```
 
 ## Como Executar o Projeto Localmente

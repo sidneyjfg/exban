@@ -1,0 +1,56 @@
+/* Properties.css */
+
+.properties-page {
+  margin: 20px;
+}
+
+.add-property-button {
+  padding: 10px 20px;
+  background-color: #007bff;
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.add-property-button:hover {
+  background-color: #0056b3;
+}
+
+.modal-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5); /* Fundo escuro para o modal */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; /* Certifica-se de que o modal fique na frente de tudo */
+}
+
+.modal {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  width: 500px;
+  max-width: 90%;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  position: relative;
+  z-index: 1001;
+}
+
+.button-cancel {
+  margin-top: 10px;
+  background-color: #f44336;
+  color: white;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+}
+
+.button-cancel:hover {
+  background-color: #d32f2f;
+}

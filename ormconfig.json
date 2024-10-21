@@ -1,0 +1,21 @@
+{
+    "type": "postgres",
+    "host": "localhost",
+    "port": 5432,
+    "username": "postgres",
+    "password": "fg01032003",
+    "database": "imoveis_financiamentos_db",
+    "synchronize": true,
+    "logging": false,
+    "entities": [
+      "src/models/**/*.ts"
+    ],
+    "migrations": [
+      "src/migration/**/*.ts"
+    ],
+    "cli": {
+      "entitiesDir": "src/models",
+      "migrationsDir": "src/migration"
+    }
+  }
+  
