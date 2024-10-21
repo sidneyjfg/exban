@@ -135,7 +135,7 @@ frontend/
 
 1. **Clonar o Repositório**
    ```bash
-   git clone https://github.com/seu-usuario/fullstack-exban.git
+   git clone https://github.com/sidneyjf/exban.git
    ```
 
 2. **Instalar Dependências**
