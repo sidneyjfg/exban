@@ -24,8 +24,8 @@ Antes de iniciar, verifique se você tem as seguintes ferramentas instaladas:
 1. Clone o repositório:
 
    ```bash
-   git clone https://github.com/SeuUsuario/fullstackexban.git
-   cd fullstackexban
+   git clone https://github.com/SeuUsuario/exban.git
+   cd exban
 
 ``` bash
 fullstackexban/
