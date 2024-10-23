@@ -161,9 +161,12 @@ frontend/
    docker-compose -f exban.yml up --build
    ```
 
+6. **As migrations serão criadas automaticamente diretamente no container**
+
 Caso queira testar pelo frontend em uma outra aba/terminal execute
 ```bash
 cd frontend/
+npm install
 npm start
 ```
 

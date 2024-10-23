@@ -30,7 +30,7 @@ services:
       - "3000:3000"                             # Porta da aplicação
     volumes:
       - .:/usr/src/app                          # Volume para desenvolvimento contínuo
-    command: npm run start                      # Comando para rodar a aplicação
+    command: /bin/sh -c "npm run migrate && npm run start"
 
 volumes:
   postgres_data:

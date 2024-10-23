@@ -5,17 +5,17 @@
     "username": "postgres",
     "password": "fg01032003",
     "database": "imoveis_financiamentos_db",
-    "synchronize": true,
+    "synchronize": false,
     "logging": false,
     "entities": [
-      "src/models/**/*.ts"
+      "dist/models/**/*.js"
     ],
     "migrations": [
-      "src/migration/**/*.ts"
+      "dist/migrations/**/*.js"
     ],
     "cli": {
-      "entitiesDir": "src/models",
-      "migrationsDir": "src/migration"
+      "entitiesDir": "dist/models",
+      "migrationsDir": "dist/migrations"
     }
   }
   
