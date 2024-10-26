@@ -91,7 +91,6 @@ const PropertiesPage = () => {
             <PropertyForm 
               onSubmit={handlePropertySubmit} 
               property={currentProperty} // Passa o imóvel atual (para edição) ou null (para novo imóvel)
-              clientId={1} // Pode ajustar o clientId conforme o necessário
             />
             <button 
               className="button-cancel" 

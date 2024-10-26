@@ -10,7 +10,7 @@ export class PropertyService {
         const property = await this.propertyRepository.create(data); // Cria o imóvel
         await this.propertyRepository.save(property); // Salva o imóvel no banco de dados
         console.log("Imóvel criado:", property); // Log após criação
-
+    
         return property;
     }
 

@@ -4,7 +4,7 @@ import { Client } from './Client.js';  // Ajuste o caminho conforme necessário
 @Entity('properties')
 export class Property {
   @PrimaryGeneratedColumn('uuid')
-  id?: string;
+  id!: string;
 
   @Column({ length: 255 })
   address!: string;
@@ -12,7 +12,7 @@ export class Property {
   @Column('decimal', { precision: 10, scale: 2 })
   value!: number;
 
-  @ManyToOne(() => Client, client => client.id)
+  @ManyToOne(() => Client, { nullable: true })  // Relacionamento opcional
   @JoinColumn({ name: 'clientId' })
   client?: Client;
 
