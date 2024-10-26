@@ -6,31 +6,45 @@ services:
     image: postgres:latest
     container_name: postgres_container
     environment:
-      POSTGRES_USER: postgres            # Puxando do .env
-      POSTGRES_PASSWORD: fg01032003        # Puxando do .env
-      POSTGRES_DB: imoveis_financiamentos_db                  # Puxando do .env
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: fg01032003
+      POSTGRES_DB: imoveis_financiamentos_db
     ports:
-      - "5432:5432"                            # Porta padrão do PostgreSQL
+      - "5432:5432"
     volumes:
-      - postgres_data:/var/lib/postgresql/data # Volume para persistência dos dados
+      - postgres_data:/var/lib/postgresql/data
+    networks:
+      - exban-network
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U postgres"]
+      interval: 10s
+      retries: 5
 
   # Configuração da Aplicação Node.js
   app:
     build: .
     container_name: node_app_container
     environment:
-      - DB_HOST=postgres                     # Puxando do .env
-      - DB_PORT=5432                      # Puxando do .env
-      - DB_USERNAME=postgres              # Puxando do .env
-      - DB_PASSWORD=fg01032003              # Puxando do .env
-      - DB_NAME=imoveis_financiamentos_db                      # Puxando do .env
+      - DB_HOST=postgres
+      - DB_PORT=5432
+      - DB_USERNAME=postgres
+      - DB_PASSWORD=fg01032003
+      - DB_NAME=imoveis_financiamentos_db
     depends_on:
-      - postgres                                # Certifica que o PostgreSQL está rodando antes da aplicação
+      postgres:
+        condition: service_healthy
     ports:
-      - "3000:3000"                             # Porta da aplicação
+      - "3000:3000"
     volumes:
-      - .:/usr/src/app                          # Volume para desenvolvimento contínuo
+      - .:/usr/src/app
+      - /usr/src/app/dist
+    networks:
+      - exban-network
     command: /bin/sh -c "npm run migrate && npm run start"
+
+networks:
+  exban-network:
+    driver: bridge
 
 volumes:
   postgres_data:

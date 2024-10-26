@@ -7,7 +7,7 @@
   "scripts": {
     "dev": "NODE_OPTIONS='--loader ts-node/esm' ts-node-dev --project tsconfig.json --respawn src/app.ts",
     "typeorm": "ts-node -r tsconfig-paths/register ./node_modules/typeorm/cli.js",
-    "migrate": "node ./node_modules/typeorm/cli.js migration:run -d dist/shared/infra/database/data-source.js",
+    "migrate": "node ./node_modules/typeorm/cli.js migration:run -d ./dist/shared/infra/database/data-source.js",
     "build": "tsc --project tsconfig.build.json",
     "start": "node dist/app.js",
     "test": "NODE_OPTIONS=--loader=ts-node/esm mocha --require ts-node/register src/tests/**/*.spec.ts"
