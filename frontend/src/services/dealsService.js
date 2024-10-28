@@ -17,12 +17,23 @@ const dealService = {
   async getAllDeals() {
     try {
       const response = await axios.get(API_URL);
+      
+      if (!response.data || response.data.length === 0) {
+        // Lança um aviso específico para resposta vazia
+        throw { isEmpty: true, message: "Nenhum financiamento registrado." };
+      }
+  
       return response.data;
     } catch (error) {
+      if (error.isEmpty) {
+        // Aviso personalizado para lista vazia
+        return [];
+      }
       console.error('Erro ao buscar financiamentos:', error);
       throw error;
     }
   },
+  
 
   async deleteDeal(id) {
     try {

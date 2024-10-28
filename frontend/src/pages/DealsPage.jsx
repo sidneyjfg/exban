@@ -21,12 +21,23 @@ const DealsPage = () => {
   const fetchDeals = async () => {
     try {
       const data = await dealService.getAllDeals();
-      setDeals(data);
-      toast.success('Financiamentos carregados com sucesso!');
+      console.log("Data deals: ", data);
+  
+      if (data.length === 0) {
+        // Exibe um aviso em caso de lista vazia
+        toast.warn("Nenhum financiamento registrado.");
+      } else {
+        setDeals(data);
+        toast.success("Financiamentos carregados com sucesso!");
+      }
+  
     } catch (error) {
-      toast.error("Erro ao carregar financiamentos: ", error.response?.data?.message);
+      // Exibe um erro apenas se houver problema real de conexão com o backend
+      toast.error("Erro ao carregar financiamentos: " + (error.response?.data?.message || "Erro desconhecido."));
     }
   };
+  
+  
 
   const fetchClients = async () => {
     try {
