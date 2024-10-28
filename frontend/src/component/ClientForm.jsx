@@ -28,23 +28,30 @@ function ClientForm({ isOpen, setIsOpen, fetchClients, client }) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+    
+        // Criar uma cópia de newClient com fiscalIdentifier sem formatação
+        const clientData = {
+            ...newClient,
+            fiscalIdentifier: newClient.fiscalIdentifier.replace(/\D/g, '') // remove formatação
+        };
+    
         try {
             if (client) {
                 // Atualizar cliente
-                await clientService.updateClient(client.id, newClient);
+                await clientService.updateClient(client.id, clientData);
                 toast.success('Cliente atualizado com sucesso!');
             } else {
                 // Adicionar cliente
-                await clientService.addClient(newClient);
+                await clientService.addClient(clientData);
                 toast.success('Cliente adicionado com sucesso!');
             }
-
         } catch (error) {
             toast.error(error.response?.data?.message || 'Erro ao processar cliente.');
         }
+    
         await fetchClients(); // Atualiza a lista de clientes
         setIsOpen(false); // Fecha a modal imediatamente após o sucesso
-    };
+    };    
 
     if (!isOpen) return null;
 
