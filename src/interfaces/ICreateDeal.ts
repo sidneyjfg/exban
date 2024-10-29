@@ -6,5 +6,4 @@ export interface ICreateDeal {
   issueDate: string;    // A data de emissão do financiamento
   clientId: string;     // O ID do cliente
   propertyId: string;   // O ID do imóvel
-  status: string;       // Status do financiamento (ex: 'active', 'closed')
 }

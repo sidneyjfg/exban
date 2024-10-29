@@ -48,9 +48,11 @@ const DealForm = ({ onSubmit, onClose, deal, clients, properties }) => {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    const numericAmount = parseFloat(rawAmount.replace(/[^\d.-]/g, '')) || 0;
+    // Converte vírgula para ponto decimal e remove pontos para obter o valor numérico correto
+    const numericAmount = parseFloat(rawAmount.replace(/R\$\s?/g, '').replace(/\./g, '').replace(',', '.'));
     const numericInterestRate = parseFloat(interestRate) || 0;
 
+    // Verifica se todos os campos obrigatórios estão preenchidos corretamente
     if (!numericAmount || !numericInterestRate || !issueDate || !selectedClient || !selectedProperty) {
       toast.error('Por favor, preencha todos os campos corretamente.');
       return;
@@ -58,13 +60,12 @@ const DealForm = ({ onSubmit, onClose, deal, clients, properties }) => {
 
     const dealData = {
       value: numericAmount,
-      interestRate: numericInterestRate,
+      interestRate: numericInterestRate || 0,
       issueDate,
       clientId: selectedClient?.value,
       propertyId: selectedProperty?.value,
-      status: "active"
     };
-
+    console.log("DEAL DATA: ",dealData);
     try {
       if (deal?.id) {
         await dealService.updateDeal(deal.id, dealData);
@@ -78,7 +79,8 @@ const DealForm = ({ onSubmit, onClose, deal, clients, properties }) => {
     } catch (error) {
       toast.error(`Erro: ${error.response?.data?.message}`);
     }
-  };
+};
+
 
   return (
     <div className="modal-backdrop">

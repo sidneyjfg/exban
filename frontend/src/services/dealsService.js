@@ -6,13 +6,22 @@ const dealService = {
   async createDeal(dealData) {
     try {
       const response = await axios.post(API_URL, dealData);
-      console.log("dealData recebido no dealsService: ",dealData);
+      console.log("dealData enviado para dealsService:", dealData);
+      console.log("response.data:", response.data);
       return response.data;
     } catch (error) {
-      console.error('Erro ao criar financiamento:', error);
+      if (error.response) {
+        console.error('Erro do servidor:', error.response.data);
+        console.error('Status do erro:', error.response.status);
+      } else if (error.request) {
+        console.error('Nenhuma resposta recebida do servidor:', error.request);
+      } else {
+        console.error('Erro ao configurar a solicitação:', error.message);
+      }
       throw error;
     }
-  },
+  }
+  ,
 
   async getAllDeals() {
     try {

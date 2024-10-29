@@ -48,15 +48,22 @@ export class DealService {
         `A data de emissão (issueDate) deve estar entre ${minDate.toISOString().split('T')[0]} e ${maxDate.toISOString().split('T')[0]}.`
       );
     }
-  
+    
+    const interestRate = data.interestRate;
+    if (interestRate === undefined || interestRate === null) {
+      throw new Error('A taxa de juros (interestRate) é obrigatória.');
+    }
+
+    const value = data.value;
     // Criação do financiamento com cliente e imóvel
     const deal = await this.dealRepository.create({
-      ...data,
+      value,
+      interestRate,
       property,           // A entidade Property
       client,             // A entidade Client
       issueDate,          // Agora passando como objeto Date
     });
-  
+    
     return await this.dealRepository.save(deal);  // Usa 'await' para resolver a Promise
   }
   

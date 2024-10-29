@@ -19,6 +19,9 @@ export class Deal {
   @Column('decimal', { precision: 10, scale: 2 })
   value!: number;  // O valor do financiamento, obrigatório e positivo
 
+  @Column('decimal', { precision: 5, scale: 2 })
+  interestRate!: number; // Taxa de juros, obrigatório e positivo
+
   @Column({ type: 'date' })
   issueDate!: Date;  // Data de emissão do financiamento
 

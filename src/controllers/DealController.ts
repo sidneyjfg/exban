@@ -7,21 +7,21 @@ export class DealController {
 
   public async createDeal(req: Request, res: Response): Promise<Response> {
     try {
-      const { value, interestRate, status, clientId, propertyId, issueDate } = req.body;
+      const { value, interestRate, clientId, propertyId, issueDate } = req.body;
   
       // Validação básica dos dados recebidos
       if (!value || !clientId || !propertyId || !issueDate) {
         return res.status(400).json({ message: 'Parâmetros inválidos. Certifique-se de enviar value, clientId, propertyId e issueDate.' });
       }
-  
+      
       const dealData: ICreateDeal = {
         value,
-        interestRate,
+        interestRate: interestRate ?? 0,  // Garante interestRate como 0 caso seja null ou undefined
         issueDate,
         clientId,
-        propertyId,
-        status
+        propertyId
       };
+      console.log("dealData do controller -> ",dealData )
   
       // Chama o serviço para criar o financiamento com validações
       const deal = await this.dealService.createDeal(dealData);
@@ -33,6 +33,7 @@ export class DealController {
       return res.status(500).json({ message: errorMessage });
     }
   }
+  
   
 
   public async getAllDeals(req: Request, res: Response): Promise<Response> {
