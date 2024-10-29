@@ -155,13 +155,27 @@ frontend/
    DB_NAME=imoveis_financiamentos_db
    ```
 
-5. **Iniciar o Servidor**
+5. **[Iniciar o Servidor](#Iniciar-o-Servidor)**
    Inicie o servidor:
    ```bash
    docker-compose -f exban.yml up --build
    ```
 
-6. **As migrations serão criadas automaticamente diretamente no container**
+6. **Configurar as Migrations**
+
+   As migrations serão criadas automaticamente no container. Se houver migrations anteriores no banco de dados, você deve [excluir as tabelas de migrations e entidades](#excluir-tabelas-existentes).
+
+6.1. **[Excluir Tabelas Existentes](#excluir-tabelas-existentes)**
+
+   Se o banco já contém migrations e tabelas antigas, entre no container em modo interativo e rode os comandos abaixo:
+   ```sql
+   drop table migrations;
+   drop table deals;
+   drop table properties;
+   drop table clients;
+
+ ```
+ 6. **Realize o tópico [5 novamente](#Iniciar-o-Servidor) novamente**
 
 Caso queira testar pelo frontend os endpoints em uma outra aba/terminal execute
 ```bash
